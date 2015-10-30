@@ -1,0 +1,42 @@
+---
+title: "ISLChapter2 Excercise"
+author: "Huy Tran"
+date: "October 29, 2015"
+output: html_document
+---
+
+
+```{r}
+college <- read.csv("./Data/College.csv")
+
+rownames(college) = college[,1]
+college = college[,-1]
+str(college)
+```
+
+```{r}
+pairs(college[,1:10])
+
+plot(college$Private, college$Outstate)
+```
+
+```{r}
+Elite = rep("No", nrow(college))
+Elite[college$Top10perc>50]="Yes"
+Elite = as.factor(Elite)
+college = data.frame(college, Elite)
+plot(college$Elite, college$Outstate) # Tuition at Elite school seems to be higher
+```
+
+```{r}
+par(mfrow=c(2,2))
+hist(college$Apps)
+hist(college$Outstate)
+hist(college$Grad.Rate)
+hist(college$Enroll)
+```
+
+```{r}
+plot(college$Elite, college$Grad.Rate) # the Grad rate looks higher at Elite school
+```
+
